@@ -22,7 +22,8 @@ def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq):
         warmup_iters = min(1000, len(data_loader) - 1)
 
         lr_scheduler = utils.warmup_lr_scheduler(optimizer, warmup_iters, warmup_factor)
-
+    
+    """ LOOP DATA LOGGER """
     for images, targets in metric_logger.log_every(data_loader, print_freq, header):
         images = list(image.to(device) for image in images)
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
@@ -101,7 +102,7 @@ def evaluate(model, data_loader, device):
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
     coco_evaluator.synchronize_between_processes()
-
+    print("COCO stats:")
     # accumulate predictions from all images
     coco_evaluator.accumulate()
     coco_evaluator.summarize()
