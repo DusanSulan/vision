@@ -62,7 +62,7 @@ print("Loss: ", loss_list.deque)"""
         metric_logger.update(loss=losses_reduced, **loss_dict_reduced)
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
 
-    train_one_epoch = metric_logger
+    return metric_logger
 
 
 def _get_iou_types(model):
