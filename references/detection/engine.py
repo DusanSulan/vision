@@ -33,15 +33,15 @@ def train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq):
         losses = sum(loss for loss in loss_dict.values())
 
         """
-            loss_list = metric_logger.meters.get('loss')
-    loss_axis.append(loss_list.value)
+loss_list = metric_logger.meters.get('loss')
+loss_axis.append(loss_list.value)
 
-    print("Loss: ", loss_list.value)
-    print("Loss: ", loss_list.deque)
-    # update the learning rate"""
+print("Loss: ", loss_list.value)
+print("Loss: ", loss_list.deque)"""
 
     
         # reduce losses over all GPUs for logging purposes
+        # calc average loss from losses 
         loss_dict_reduced = utils.reduce_dict(loss_dict)
         losses_reduced = sum(loss for loss in loss_dict_reduced.values())
 
